@@ -1,0 +1,143 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #111111;
+  --navBg: #1e1e1e;
+  --green: #56d453;
+  --ease-out: cubic-bezier(0, 0.55, 0.55, 1);
+  --ease-in: cubic-bezier(0.55, 0.01, 1, 1);
+}
+
+.container {
+  min-height: 100vh;
+  background-color: var(--bg);
+  display: grid;
+  place-content: center;
+  font-family: sans-serif;
+}
+
+.navbar {
+  width: 600px;
+  height: 120px;
+  padding: 0 3rem;
+  border-radius: 1rem;
+  background-color: var(--navBg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: content-box;
+  z-index: 0;
+  position: relative;
+}
+
+.navbar__item {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  stroke: white;
+  fill: transparent;
+  stroke-width: 1.2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 400;
+  cursor: pointer;
+}
+
+.icon.active {
+  stroke: black;
+  transform: translateY(-105%);
+  opacity: 0;
+  stroke-width: 1.5px;
+  animation: fade 0.5s var(--ease-out) 0.3s forwards,
+    stroke 0.5s var(--ease-out) 0.3s reverse;
+}
+
+@keyframes fade {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 400;
+  }
+}
+
+.navbar__item span {
+  position: absolute;
+  bottom: 10%;
+  color: white;
+  text-transform: capitalize;
+  overflow: hidden;
+}
+
+.navbar__item span::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--navBg);
+  position: absolute;
+}
+
+.icon.active ~ span {
+  bottom: 20%;
+}
+
+.icon.active ~ span::before {
+  animation: reveal 0.5s var(--ease-in) forwards;
+}
+
+@keyframes reveal {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* indicator */
+.indicator {
+  width: 120px;
+  height: 120px;
+  background-color: var(--green);
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+  top: 0;
+  transform: translateY(-50%);
+  border: 1rem solid var(--bg);
+  left: 3rem;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.corner {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  top: 50%;
+  fill: white;
+  fill: var(--bg);
+}
+
+.left {
+  left: -52%;
+  transform: rotateY(180deg);
+}
+
+.right {
+  right: -52%;
+}
